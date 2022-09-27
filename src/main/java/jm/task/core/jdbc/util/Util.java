@@ -13,20 +13,22 @@ public class Util {
     public static Connection getConnection() {
         try {
             connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+            System.out.println("Подключение успешно!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return connection;
     }
 
-    public static void setConnectionClose() throws SQLException {
-
+    public static void setConnectionClose() {
+        try {
             connection.close();
             System.out.println("Подключение успешно закрыто");
+        } catch (NullPointerException | SQLException e) {
+            e.printStackTrace();
+        }
 
     }
-
-
 }
 
 
