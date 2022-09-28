@@ -10,7 +10,6 @@ public class UserServiceImpl implements UserService {
 
     UserDao userDao = new UserDaoJDBCImpl();
 
-    @Override
     public void createUsersTable() {
         userDao.createUsersTable();
     }
@@ -19,7 +18,6 @@ public class UserServiceImpl implements UserService {
         userDao.dropUsersTable();
     }
 
-    @Override
     public void saveUser(String name, String lastName, byte age) {
         userDao.saveUser(name, lastName, age);
         System.out.println("User с именем – " + name + " добавлен в базу данных");
@@ -29,7 +27,6 @@ public class UserServiceImpl implements UserService {
         userDao.removeUserById(id);
     }
 
-    @Override
     public List<User> getAllUsers() {
         List<User> users = userDao.getAllUsers();
         for (User user : users) {

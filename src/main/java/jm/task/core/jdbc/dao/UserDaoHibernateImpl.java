@@ -2,6 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -26,8 +27,9 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    public void removeUserById(long id) {
+    public LinkedList<User> removeUserById(long id) {
 
+        return null;
     }
 
     @Override

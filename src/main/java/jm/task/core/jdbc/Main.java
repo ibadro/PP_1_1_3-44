@@ -12,9 +12,9 @@ public class Main {
         userServiceImpl.saveUser("Daniel", "badro", (byte) 12);
         userServiceImpl.saveUser("Damir", "badro", (byte) 8);
         userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
-        userServiceImpl.removeUserById(4);
-        userServiceImpl.getAllUsers();
-        userServiceImpl.cleanUsersTable();
-        userServiceImpl.dropUsersTable();
+//        userServiceImpl.removeUserById(4);
+//        userServiceImpl.getAllUsers();
+//        userServiceImpl.cleanUsersTable();
+//        userServiceImpl.dropUsersTable();
     }
 }
