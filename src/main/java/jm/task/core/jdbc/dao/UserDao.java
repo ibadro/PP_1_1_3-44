@@ -12,7 +12,7 @@ public interface UserDao {
 
     void saveUser(String name, String lastName, byte age);
 
-    LinkedList<User> removeUserById(long id);
+    void removeUserById(long id);
 
     List<User> getAllUsers();
 

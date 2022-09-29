@@ -27,9 +27,8 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    public LinkedList<User> removeUserById(long id) {
+    public void removeUserById(long id) {
 
-        return null;
     }
 
     @Override
