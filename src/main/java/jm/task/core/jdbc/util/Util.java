@@ -13,20 +13,15 @@ public class Util {
 
     public static Connection getConnection() {
         try {
-            Class.forName(driver);
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("Соединение с БД установлено");
-
-        } catch (SQLException | ClassNotFoundException e){
-            System.out.println("Соединение с БД не установлено");
+            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return connection;
     }
 
     public static void ConnectionClose() {
         try {
             connection.close();
-            System.out.println("Подключение успешно закрыто");
         } catch (NullPointerException | SQLException e) {
             e.printStackTrace();
         }
