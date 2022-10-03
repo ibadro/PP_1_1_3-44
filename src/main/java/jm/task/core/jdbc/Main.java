@@ -19,9 +19,9 @@ public class Main {
         userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
         userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
         userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
-       // userServiceImpl.removeUserById(4);
-      //  userServiceImpl.getAllUsers();
-   //    userServiceImpl.cleanUsersTable();
-       // userServiceImpl.dropUsersTable();
+        userServiceImpl.removeUserById(4);
+        userServiceImpl.getAllUsers();
+        userServiceImpl.cleanUsersTable();
+        userServiceImpl.dropUsersTable();
     }
 }

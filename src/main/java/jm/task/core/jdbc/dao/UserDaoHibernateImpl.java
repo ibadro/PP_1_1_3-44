@@ -10,8 +10,6 @@ import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UserDaoHibernateImpl implements UserDao {
     private final SessionFactory mySessionFactory;
@@ -83,10 +81,10 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAllUsers() {                                      // READ методы не оборачиваем в транзакции
+    public List<User> getAllUsers() {
         try (Session session = mySessionFactory.openSession()) {
             session.beginTransaction();
-            Query<User> query = session.createQuery("from User");          // загружаем в память сохраняемые объекты POJO класса
+            Query<User> query = session.createQuery("from User");
             System.out.println("INFO: Getting Users successfully");
             return query.getResultList();
         } catch (Exception e) {
