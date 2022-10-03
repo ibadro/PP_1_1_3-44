@@ -9,8 +9,10 @@ import java.util.List;
 
 
 public class UserDaoJDBCImpl implements UserDao {
-//      public UserDaoJDBCImpl() {
-//    }
+
+    public UserDaoJDBCImpl() {
+
+    }
 
     public void createUsersTable() { //создание таблицы
         String sql = " CREATE TABLE IF NOT EXISTS users " +
@@ -20,7 +22,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 "age INT)";
         try (Connection connection = Util.getConnection();
              Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sql);
+            connection.createStatement().executeUpdate(sql);
             System.out.println("Таблица была создана!");
         } catch (SQLException e) {
             try (Connection connection = Util.getConnection()) {

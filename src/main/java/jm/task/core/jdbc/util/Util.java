@@ -17,7 +17,7 @@ public class Util {
     private final static String USERNAME = "root";
     private final static String PASSWORD = "root";
     private static Connection connection;
-
+    private volatile static Util instance;
 
     public static Connection getConnection() {
         try {
@@ -25,6 +25,17 @@ public class Util {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Util getInstance() throws SQLException {
+        if (instance == null) {
+            synchronized (Util.class) {
+                if (instance == null) {
+                    instance = new Util();
+                }
+            }
+        }
+        return instance;
     }
 
     static SessionFactory mySessionFactory;                                  // Hibernate
