@@ -9,8 +9,8 @@ import java.util.List;
 
 
 public class UserDaoJDBCImpl implements UserDao {
-    public UserDaoJDBCImpl() {
-    }
+//      public UserDaoJDBCImpl() {
+//    }
 
     public void createUsersTable() { //создание таблицы
         String sql = " CREATE TABLE IF NOT EXISTS users " +
@@ -46,8 +46,11 @@ public class UserDaoJDBCImpl implements UserDao {
 
     //Добавление User в таблицу
     public void saveUser(String name, String lastName, byte age) {
+        String sql = "INSERT INTO" +
+                " users (name, lastName, age)" +
+                " VALUES (?, ?, ?)";
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
@@ -73,6 +76,7 @@ public class UserDaoJDBCImpl implements UserDao {
             try (Connection connection = Util.getConnection()) {
                 connection.rollback();
             } catch (SQLException a) {
+
             }
         }
 
@@ -94,7 +98,7 @@ public class UserDaoJDBCImpl implements UserDao {
             }
         } catch (SQLException e) {
             System.out.println("Ошибка при выводе пользователей!");
-            e.printStackTrace();
+            e.printStackTrace();e.printStackTrace();
             try (Connection connection = Util.getConnection()) {
                 connection.rollback();
             } catch (SQLException a) {

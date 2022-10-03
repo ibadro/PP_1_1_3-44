@@ -3,8 +3,10 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
+import javax.transaction.SystemException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SystemException {
 
         UserService userServiceImpl = new UserServiceImpl();
         userServiceImpl.createUsersTable();
@@ -12,9 +14,14 @@ public class Main {
         userServiceImpl.saveUser("Daniel", "badro", (byte) 12);
         userServiceImpl.saveUser("Damir", "badro", (byte) 8);
         userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
-        userServiceImpl.removeUserById(4);
-        userServiceImpl.getAllUsers();
-        userServiceImpl.cleanUsersTable();
-        userServiceImpl.dropUsersTable();
+        userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
+        userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
+        userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
+        userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
+        userServiceImpl.saveUser("XXXX01", "badro", (byte) 40);
+       // userServiceImpl.removeUserById(4);
+      //  userServiceImpl.getAllUsers();
+   //    userServiceImpl.cleanUsersTable();
+       // userServiceImpl.dropUsersTable();
     }
 }
