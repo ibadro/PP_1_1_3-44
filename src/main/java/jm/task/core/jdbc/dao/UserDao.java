@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public interface UserDao {
-    void createUsersTable() throws SystemException;
+    void createUsersTable() ;
 
     void dropUsersTable();
 

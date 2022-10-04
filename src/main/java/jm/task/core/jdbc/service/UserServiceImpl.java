@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     //  private final UserDao userDao = new UserDaoJDBCImpl();     // JDBC
      private final UserDao userDao = new UserDaoHibernateImpl();  // Hibernate
 
-    public void createUsersTable() throws SystemException {userDao.createUsersTable();}
+    public void createUsersTable()  {userDao.createUsersTable();}
 
     public void dropUsersTable() {userDao.dropUsersTable();}
 

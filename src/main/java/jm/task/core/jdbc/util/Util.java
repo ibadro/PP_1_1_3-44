@@ -16,8 +16,7 @@ public class Util {
     private final static String URL = "jdbc:mysql://localhost:3306/mydbtest";
     private final static String USERNAME = "root";
     private final static String PASSWORD = "root";
-    private static Connection connection;
-    private volatile static Util instance;
+    private static SessionFactory sessionFactory;
 
     public static Connection getConnection() {
         try {
@@ -27,50 +26,26 @@ public class Util {
         }
     }
 
-    public static Util getInstance() throws SQLException {
-        if (instance == null) {
-            synchronized (Util.class) {
-                if (instance == null) {
-                    instance = new Util();
-                }
+    public static SessionFactory sessionFactory() {
+        if (sessionFactory == null) {
+            try {
+                Configuration configuration = new Configuration();
+                Properties settings = new Properties();
+                settings.put(Environment.URL, URL);
+                settings.put(Environment.USER, USERNAME);
+                settings.put(Environment.PASS, PASSWORD);
+                settings.put(Environment.AUTOCOMMIT, "false");
+                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+
+                configuration.setProperties(settings);
+                configuration.addAnnotatedClass(User.class);
+                ServiceRegistry serviceReg = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+                sessionFactory = configuration.buildSessionFactory(serviceReg);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        return instance;
-    }
-
-    static SessionFactory mySessionFactory;                                  // Hibernate
-
-    public static SessionFactory getSessionFactory() {
-        Environment envrmnt = null;
-        Configuration configuration = new Configuration();
-        Properties settings = new Properties();
-        try {
-            settings.put(envrmnt.URL, URL);
-            settings.put(envrmnt.USER, USERNAME);
-            settings.put(envrmnt.PASS, PASSWORD);
-            settings.put(envrmnt.AUTOCOMMIT, "false");
-            settings.put(envrmnt.DIALECT, "org.hibernate.dialect.MySQLDialect");
-            settings.put(envrmnt.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-            configuration.setProperties(settings);
-            configuration.addAnnotatedClass(User.class);
-
-            ServiceRegistry serviceReg = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties()).build();
-            mySessionFactory = configuration
-                    .buildSessionFactory(serviceReg);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return mySessionFactory;
-    }
-
-    public static void connectionClose() {
-        try {
-            connection.close();
-        } catch (NullPointerException | SQLException e) {
-            e.printStackTrace();
-        }
-
+        return sessionFactory;
     }
 }
-
